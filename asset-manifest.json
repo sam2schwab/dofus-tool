@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/dofus-tool/static/css/main.183baca1.css",
-    "main.js": "/dofus-tool/static/js/main.32bfdcb5.js",
+    "main.css": "/dofus-tool/static/css/main.801e500d.css",
+    "main.js": "/dofus-tool/static/js/main.fcabfe29.js",
     "static/js/787.8526a16e.chunk.js": "/dofus-tool/static/js/787.8526a16e.chunk.js",
     "index.html": "/dofus-tool/index.html",
-    "main.183baca1.css.map": "/dofus-tool/static/css/main.183baca1.css.map",
-    "main.32bfdcb5.js.map": "/dofus-tool/static/js/main.32bfdcb5.js.map",
+    "main.801e500d.css.map": "/dofus-tool/static/css/main.801e500d.css.map",
+    "main.fcabfe29.js.map": "/dofus-tool/static/js/main.fcabfe29.js.map",
     "787.8526a16e.chunk.js.map": "/dofus-tool/static/js/787.8526a16e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.183baca1.css",
-    "static/js/main.32bfdcb5.js"
+    "static/css/main.801e500d.css",
+    "static/js/main.fcabfe29.js"
   ]
 }
