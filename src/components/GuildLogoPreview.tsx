@@ -1,11 +1,25 @@
-import { Card, Label, Select } from "flowbite-react";
+import { Card, Label } from "flowbite-react";
+import Select from "react-select";
 import { useMemo, useState } from "react";
+import { importAll } from "../utils/importAll";
 import { DebouncedPicker } from "./DebouncedPicker";
 
+const backIcons = importAll(require.context("../icons/back", false, /\.png$/));
+const upIcons = importAll(require.context("../icons/up", false, /\.png$/));
+
+const backOptions = Object.entries(backIcons).map(([fileName, image]) => ({
+  label: <img src={image}></img>,
+  value: fileName.replace(".png", ""),
+}));
+const upOptions = Object.entries(upIcons).map(([fileName, image]) => ({
+  label: <img src={image}></img>,
+  value: fileName.replace(".png", ""),
+}));
+
 export default function GuildLogoPreview() {
-  const [back, setBack] = useState("1");
+  const [back, setBack] = useState(backOptions[0]);
   const [backColorCode, setBackColor] = useState("#000000");
-  const [up, setUp] = useState("1");
+  const [up, setUp] = useState(upOptions[0]);
   const [upColorCode, setUpColor] = useState("#ffffff");
 
   const backColor = useMemo(
@@ -13,9 +27,6 @@ export default function GuildLogoPreview() {
     [backColorCode]
   );
   const upColor = useMemo(() => upColorCode.replace("#", "0x"), [upColorCode]);
-
-  const backOptions = useMemo(() => Array.from(Array(34).keys()).map(x => String(x+1)), []);
-  const upOptions = useMemo(() => Array.from(Array(498).keys()).map(x => String(x+1)), []);
 
   return (
     <section className="p-10">
@@ -30,13 +41,11 @@ export default function GuildLogoPreview() {
             </div>
             <Select
               id="back"
-              required={true}
-              onChange={(e) => setBack(e.target.value)}
-            >
-              {backOptions.map((i) => (
-                <option>{i.toString()}</option>
-              ))}
-            </Select>
+              isSearchable={false}
+              options={backOptions}
+              value={back}
+              onChange={(item) => setBack((old) => item ?? old)}
+            />
           </div>
           <div>
             <div className="mb-2 block">
@@ -52,13 +61,20 @@ export default function GuildLogoPreview() {
             </div>
             <Select
               id="up"
+              isSearchable={false}
+              options={upOptions}
+              value={up}
+              onChange={(item) => setUp((old) => item ?? old)}
+            />
+            {/* <Select
+              id="up"
               required={true}
               onChange={(e) => setUp(e.target.value)}
             >
-              {upOptions.map((i) => (
-                <option>{i.toString()}</option>
+              {upOptions.map(({ label, value }) => (
+                <option value={value}>{label}</option>
               ))}
-            </Select>
+            </Select> */}
           </div>
           <div>
             <div className="mb-2 block">
@@ -69,7 +85,7 @@ export default function GuildLogoPreview() {
         </Card>
         <div className="flex items-center justify-center p-10">
           <iframe
-            src={`https://static.ankama.com/dofus/renderer/emblem/${up}/${back}/${upColor}/${backColor}/300_300-0.png`}
+            src={`https://static.ankama.com/dofus/renderer/emblem/${up.value}/${back.value}/${upColor}/${backColor}/300_300-0.png`}
             referrerPolicy="no-referrer"
             width="300"
             height="300"
